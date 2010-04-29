@@ -1,13 +1,10 @@
 require 'formula'
 
 class Scalate <Formula
-  # when 1.1 is out...
-  # url 'http://repo.fusesource.com/nexus/content/repositories/public/org/fusesource/scalate/scalate-distro/1.1/scalate-distro-1.1-unix-bin.tar.gz'
-  
-  url 'http://repo.fusesource.com/nexus/service/local/artifact/maven/redirect?r=snapshots&g=org.fusesource.scalate&a=scalate-distro&v=1.1-SNAPSHOT&e=tar.gz&c=unix-bin'
-  version '1.1-SNAPSHOT'
+  url 'http://repo1.maven.org/maven2/org/fusesource/scalate/scalate-distro/1.1/scalate-distro-1.1-unix-bin.tar.gz'
+  version '1.1'
   homepage 'http://scalate.fusesource.org/'
-  md5 '0cc46b70850fd83ee1e4811cc1ea77bc'
+  md5 'fbbca51775da58464e1eddd30c736596'
 
   def startup_script
     <<-EOS.undent
