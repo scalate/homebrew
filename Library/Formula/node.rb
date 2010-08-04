@@ -1,37 +1,27 @@
 require 'formula'
 
 class Node <Formula
-  url 'http://nodejs.org/dist/node-v0.1.91.tar.gz'
+  url 'http://nodejs.org/dist/node-v0.1.102.tar.gz'
   head 'git://github.com/ry/node.git'
   homepage 'http://nodejs.org/'
-  md5 '9610790a56c0b371ae223e0f13b5cc14'
+  md5 '93279f1e4595558dacb45a78259b7739'
 
   aka 'node.js'
-  
-  depends_on 'gnutls' => :recommended
-  
+
+  # Stripping breaks dynamic loading
   def skip_clean? path
-    # TODO: at some point someone should tweak this so it only skips clean
-    # for the bits that break the build otherwise
     true
   end
 
   def install
-    ENV.gcc_4_2
-    inreplace %w{wscript configure} do |s|
+    fails_with_llvm
+
+    inreplace 'wscript' do |s|
       s.gsub! '/usr/local', HOMEBREW_PREFIX
       s.gsub! '/opt/local/lib', '/usr/lib'
     end
+
     system "./configure", "--prefix=#{prefix}"
     system "make install"
-  end
-  
-  def caveats; <<-EOS.undent
-    If you:
-      brew install rlwrap
-    then you can:
-      rlwrap node-repl
-    for a nicer command-line interface.
-    EOS
   end
 end
